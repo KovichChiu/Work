@@ -26,32 +26,32 @@ class GameCore
 
     }
 
-    //取得答案
-    function showAnsBot()
-    {
-        echo 'Bot';
-        foreach ($this->answerBOT as $r) {
-            echo $r;
-        }
-        $this->__setAnswer();
-    }
+//    //取得答案
+//    function showAnsBot()
+//    {
+//        echo 'Bot';
+//        foreach ($this->answerBOT as $r) {
+//            echo $r;
+//        }
+//        $this->__setAnswer();
+//    }
+//
+//    //取得玩家輸入值
+//    function showAnsPyr()
+//    {
+//        echo 'pyr';
+//        foreach ($this->answerPLAYER as $r) {
+//            echo $r;
+//        }
+//    }
 
-    //取得玩家輸入值
-    function showAnsPyr()
-    {
-        echo 'pyr';
-        foreach ($this->answerPLAYER as $r) {
-            echo $r;
-        }
-    }
-
-    //加入玩家輸入值
+    //設定玩家輸入值
     public function setAnswerPLAYER($answer)
     {
         $this->answerPLAYER = preg_split('//', $answer, -1, PREG_SPLIT_NO_EMPTY);
     }
 
-    //確認玩家輸入值是否有重複
+    //確認玩家輸入值是否有重複(利用總數量與種類數量區分，若不同則為TRUE)
     public function checkRepeat()
     {
         return count($this->answerPLAYER) != count(array_unique($this->answerPLAYER));
@@ -76,62 +76,62 @@ class GameCore
         $this->addHistory($this->times . ". " . $tmpInput . " " . $this->counterA . "A" . $this->counterB . "B");
     }
 
-    //增加紀錄
+    //增加次數
 
     public function countTimes()
     {
         $this->times++;
     }
 
-    //取得紀錄
+    //取得次數
 
     public function addHistory($history)
     {
         $this->history .= $history . "\\n";
     }
 
-    //增加次數
-
-    public function getHistory()
-    {
-        return $this->history;
-    }
-
-    //取得次數
+    //增加紀錄
 
     public function getTimes()
     {
         return $this->times;
     }
 
-    //確認是否有答案
-    public function getAnswerBOT()
+    //取得紀錄
+
+    public function getHistory()
     {
-        return $this->answerBOT;
+        return $this->history;
     }
 
-    //設定A數
+//    //確認是否有答案
+//    public function getAnswerBOT()
+//    {
+//        return $this->answerBOT;
+//    }
+
+    //取得A數
 
     public function getCounterA()
     {
         return $this->counterA;
     }
 
-    //設定B數
+    //設定A數
 
     public function setCounterA($counterA)
     {
         $this->counterA = $counterA;
     }
 
-    //取得A數
+    //取得B數
 
     public function getCounterB()
     {
         return $this->counterB;
     }
 
-    //取得B數
+    //設定B數
 
     public function setCounterB($counterB)
     {

@@ -1,4 +1,4 @@
-<h1>Game_1A2B</h1>
+﻿<h1>Game_1A2B</h1>
 <p dir="auto">這是一個單人的數學益智遊戲<br></p>
 <ul dir="auto">
     <li>進入頁面後輸入4位「不重複」的數字，並按下Enter鍵送出答案。</li>
@@ -9,3 +9,9 @@
 <br>
 Programing by Chi-Fu since 190909.<br>
 chi-fu@mail.chungyo.net<br>
+
+==========================================<br>
+<2019/09/25 UPDATE><br>
+-已報告。<br>
+-針對未使用Function調整(註解)。<br>
+-調整Function解說註解不符合Function的問題。<br>
