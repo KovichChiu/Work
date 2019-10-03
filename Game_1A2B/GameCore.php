@@ -26,25 +26,6 @@ class GameCore
 
     }
 
-//    //取得答案
-//    function showAnsBot()
-//    {
-//        echo 'Bot';
-//        foreach ($this->answerBOT as $r) {
-//            echo $r;
-//        }
-//        $this->__setAnswer();
-//    }
-//
-//    //取得玩家輸入值
-//    function showAnsPyr()
-//    {
-//        echo 'pyr';
-//        foreach ($this->answerPLAYER as $r) {
-//            echo $r;
-//        }
-//    }
-
     //設定玩家輸入值
     public function setAnswerPLAYER($answer)
     {
@@ -103,12 +84,6 @@ class GameCore
     {
         return $this->history;
     }
-
-//    //確認是否有答案
-//    public function getAnswerBOT()
-//    {
-//        return $this->answerBOT;
-//    }
 
     //取得A數
 
