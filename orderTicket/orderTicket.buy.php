@@ -11,7 +11,7 @@ if (isset($_GET['t_id'])) {
     $ticketid = $_GET['t_id'];
 
     //如果session中已經有撈過的票券資料直接用，沒有則new
-    $ticketArrname = "ticket".$ticketid;
+    $ticketArrname = "ticket" . $ticketid;
     $ticket = (isset($_SESSION[$ticketArrname]) ? ($_SESSION[$ticketArrname]) : (new orderTicket($ticketid)));
     $_SESSION[$ticketArrname] = $ticket;
 

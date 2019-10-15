@@ -6,7 +6,7 @@ $redis = new Redis();
 $redis->connect("localhost", 6379);
 
 $ticketID = $_GET['t_id'];
-$ticketArrname = "ticket".$ticketID;
+$ticketArrname = "ticket" . $ticketID;
 $ticket = $_SESSION[$ticketArrname];
 $ticketName = $ticket->getName();
 
@@ -21,10 +21,10 @@ while (true) {
     //查看第一個是不是自己
     $uid = "";
     $sessionUID = substr($_SESSION['u_id'], 0, 9);
-    $redisUID = substr($redis->lIndex($ticketName,0), 0, 9);
-    if($sessionUID == $redisUID){
+    $redisUID = substr($redis->lIndex($ticketName, 0), 0, 9);
+    if ($sessionUID == $redisUID) {
         $uid = $redis->lPop($ticketName);
-    }else{
+    } else {
         continue;
     }
 
@@ -43,7 +43,7 @@ while (true) {
     } else {
         //成功搶票，停止queue，剩餘基本資料到其他地方填寫
         $lastTicket = intval($redis->get("lastTicket"));
-        $redis->append("lastTicket", $lastTicket);
+        $redis->set("lastTicket", $lastTicket);
         $redis->close();
         echo '<script>alert("已經完成搶票，請至個人已購訂單編輯資料");</script>';
         echo '<script>document.location.href="index.php";</script>';

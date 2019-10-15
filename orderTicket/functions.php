@@ -48,10 +48,12 @@ function sqlInject($input)
     $output = str_replace($key, "", $input);
     return $output;
 }
+
 /*
  * 判斷有沒有登入
  */
-function isLogin(){
+function isLogin()
+{
     $flag = true;
     $flag = ($flag && isset($_SESSION['u_id'])) ? (true) : (false);
     $flag = ($flag && isset($_SESSION['u_acc'])) ? (true) : (false);
@@ -62,7 +64,7 @@ function isLogin(){
 
 function headinc()
 {
-?>
+    ?>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, Maximum-scale=1.0, minimum-scale=1.0">
@@ -84,12 +86,12 @@ function headinc()
 
     <!-- GLOBAL CSS -->
     <link rel="stylesheet" href="css/global.css">
-<?php
+    <?php
 }
 
 function navBar()
 {
-?>
+    ?>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <a class="navbar-brand" href="#">搶票囉</a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
@@ -114,14 +116,14 @@ function navBar()
                 <?php
                 if (isLogin()) {
                     echo '<li class="nav-item dropdown">';
-                    echo    '<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . $_SESSION['u_name'] . '</a>';
-                    echo    '<div class="dropdown-menu" aria-labelledby="dropdown01">';
-                    echo        '<a class="dropdown-item" href="#">會員資料</a>';
-                    echo        '<a class="dropdown-item" href="orderContent.php">訂票內容</a>';
-                    echo        '<a class="dropdown-item" href="#">實名認證</a>';
-                    echo        '<div class="dropdown-divider"></div>';
-                    echo        '<a class="dropdown-item" href="login.signout.php">登出</a>';
-                    echo    '</div>';
+                    echo '<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . $_SESSION['u_name'] . '</a>';
+                    echo '<div class="dropdown-menu" aria-labelledby="dropdown01">';
+                    echo '<a class="dropdown-item" href="#">會員資料</a>';
+                    echo '<a class="dropdown-item" href="orderContent.php">訂票內容</a>';
+                    echo '<a class="dropdown-item" href="#">實名認證</a>';
+                    echo '<div class="dropdown-divider"></div>';
+                    echo '<a class="dropdown-item" href="login.signout.php">登出</a>';
+                    echo '</div>';
                     echo '</li>';
 
                 } else {
@@ -131,6 +133,7 @@ function navBar()
             </ul>
         </div>
     </nav>
-<?php
+    <?php
 }
+
 ?>
