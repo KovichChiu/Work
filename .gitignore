@@ -1,5 +1,11 @@
-#config Ignore
-config/*
+#Ignore item
+API/vendor/*
+API/composer.bat
+API/composer.json
+API/composer.phar
+API/composer.lock
+
+orderTicket/config/*.php
 
 
 #.idea Ignore
