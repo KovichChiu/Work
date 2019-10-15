@@ -11,7 +11,7 @@ function ck_Vali()
 
     if (!$flag) {
         echo '<script>alert("You are not Verified! Please Verified first.");</script>';
-        echo '<script>document.location.href="http://orderticket.test/index.php";</script>';
+        echo '<script>document.location.href="index.php";</script>';
         exit;
     }
 }

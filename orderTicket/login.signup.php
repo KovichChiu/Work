@@ -11,7 +11,7 @@ if (isset($_POST['Name']) || isset($_POST['Acc']) || isset($_POST['Pswd'])) {
 
     if (!$flag) {
         echo '<script>alert("Please fill in all \'*\' fields");</script>';
-        echo '<script>document.location.href="http://orderticket.test/login.signup.php";</script>';
+        echo '<script>document.location.href="login.signup.php";</script>';
         exit;
     } else {
         $u_name = sqlInject($_POST['Name']);
@@ -23,10 +23,10 @@ if (isset($_POST['Name']) || isset($_POST['Acc']) || isset($_POST['Pswd'])) {
         $sql = "INSERT INTO `u_account` (`u_id`, `u_name`, `u_acc`, `u_pswd`) VALUES ('" . $u_id . "', '" . $u_name . "', '" . $u_acc . "', '" . $u_pswd . "')";
         if (@mysqli_query($conn, $sql)) {
             echo '<script>alert("Sign up successed! Jump to sign in. Thanks!");</script>';
-            echo '<script>document.location.href="http://orderticket.test/login.signin.php";</script>';
+            echo '<script>document.location.href="login.signin.php";</script>';
         } else {
             echo '<script>alert("Sign up Error! Please contect us!");</script>';
-            echo '<script>document.location.href="http://orderticket.test/login.signup.php";</script>';
+            echo '<script>document.location.href="login.signup.php";</script>';
         }
     }
 }

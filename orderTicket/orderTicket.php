@@ -21,10 +21,6 @@ class orderTicket
             $this->t_content = $row['t_content'];
             $this->t_pics = $row['t_pics'];
         }
-
-        $redis = new Redis();
-        $redis->connect("localhost", 6379);
-        $redis->set("lastTicket", $this->t_pics);
     }
 
     function getID()

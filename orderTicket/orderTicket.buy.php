@@ -18,6 +18,12 @@ if (isset($_GET['t_id'])) {
     //取得票券總數量
     $ticketPics = $ticket->getPics();
 
+    //設定票卷總數
+    $lastticket = "ticket" . $ticket->getID();
+    if(!$redis->get($lastticket)){
+        $redis->set($lastticket, $ticketPics);
+    }
+
     //取得票券名稱
     $ticketName = $ticket->getName();
 

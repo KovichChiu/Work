@@ -19,11 +19,11 @@ if ($flag) {
         $_SESSION['u_id'] = $row['u_id'];
         $_SESSION['u_acc'] = $row['u_acc'];
         $_SESSION['u_name'] = $row['u_name'];
-        echo '<script>document.location.href="http://orderTicket.test";</script>';
+        echo '<script>document.location.href="index.php";</script>';
         exit;
     } else {
         echo '<script>alert("Login Error! Please retry. Thanks.");</script>';
-        echo '<script>document.location.href="http://orderticket.test/login.signin.php";</script>';
+        echo '<script>document.location.href="login.signin.php";</script>';
         exit;
     }
 

@@ -9,12 +9,13 @@ $ticketID = $_GET['t_id'];
 $ticketArrname = "ticket" . $ticketID;
 $ticket = $_SESSION[$ticketArrname];
 $ticketName = $ticket->getName();
+$lastticket = $ticketArrname;
 
 while (true) {
     //判斷還有沒有票
-    if (!$redis->get("lastTicket") > 0) {
+    if (!$redis->get($lastticket) > 0) {
         echo '<script>alert("已經沒有票了，謝謝您的搶購");</script>';
-        echo '<script>document.location.href="index.php";</script>';
+        echo '<script>document.location.href="orderTicket.list.php";</script>';
         exit;
     }
 
@@ -25,6 +26,7 @@ while (true) {
     if ($sessionUID == $redisUID) {
         $uid = $redis->lPop($ticketName);
     } else {
+        sleep(2);
         continue;
     }
 
@@ -42,8 +44,8 @@ while (true) {
         $redis->rPush($ticketName, $uid);
     } else {
         //成功搶票，停止queue，剩餘基本資料到其他地方填寫
-        $lastTicket = intval($redis->get("lastTicket"));
-        $redis->set("lastTicket", $lastTicket);
+        $lastTicket = intval($redis->get($lastticket))-1;
+        $redis->set($lastticket, $lastTicket);
         $redis->close();
         echo '<script>alert("已經完成搶票，請至個人已購訂單編輯資料");</script>';
         echo '<script>document.location.href="index.php";</script>';

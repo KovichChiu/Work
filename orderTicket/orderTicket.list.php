@@ -1,8 +1,17 @@
 <?php
 include 'functions.php';
 
+//登入否
+if(!isset($_SESSION['u_id'])){
+    echo '<script>alert("You are not Login! Please Login first.");</script>';
+    echo '<script>document.location.href="index.php";</script>';
+    exit;
+}
+
 //判斷實名認證
 ck_Vali();
+
+
 ?>
 <!doctype html>
 <html>
