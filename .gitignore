@@ -7,6 +7,8 @@ API/composer.lock
 
 orderTicket/config/*.php
 
+orderTicket_MVC/config/*.php
+
 
 #.idea Ignore
 
