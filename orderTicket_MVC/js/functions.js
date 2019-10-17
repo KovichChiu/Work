@@ -37,7 +37,7 @@ function nav() {
                     <a class="nav-link" href="#">演唱會資訊</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">我要訂票</a>
+                    <a class="nav-link" href="orderTicket.List.html">我要訂票</a>
                 </li>
             </ul>
             <ul class="navbar-nav">`+userBar+`</ul>
@@ -54,7 +54,7 @@ function signinSubmit() {
     try {
         $.ajax({
             type: 'POST',
-            url: "config/API.php",
+            url: "php/API.php",
             async: false,
             data: {
                 "func": "select",
@@ -103,7 +103,7 @@ function signupSubmit(){
     try {
         $.ajax({
             type: 'POST',
-            url: "config/API.php",
+            url: "php/API.php",
             async: false,
             data: {
                 "func": "signup",
@@ -137,4 +137,91 @@ function signout() {
     localStorage.clear();
     alert("登出!");
     location.reload();
+}
+
+/* orderTicket */
+
+function checkLogin() {
+    if(localStorage.getItem("u_id") === null){
+        alert("要先登入才能搶票喔!");
+        document.location.href="index.html";
+    }
+}
+
+function showTicket() {
+    let sql = "SELECT * FROM `ticket`";
+    try{
+        $.ajax({
+            type: 'POST',
+            url: "php/API.php",
+            async: false,
+            data: {
+                "func": "select",
+                "sql": sql
+            },
+            dataType: "json",
+            success: function (result) {
+                let tickets = ``;
+                $.each(result, function(key, value){
+                    tickets += `<div class="card mb-4 shadow-sm">`;
+                    tickets += `<div class="card-header">`;
+                    tickets += `<h4 class="my-0 font-weight-normal">`+value['t_name']+`</h4>`;
+                    tickets += `</div>`;
+                    tickets += `<div class="card-body">`;
+                    tickets += `<h1 class="card-title pricing-card-title">$`+value['t_price']+` <small class="text-muted">/NTD</small></h1>`;
+                    tickets += `<ul class="list-unstyled mt-3 mb-4">`;
+                    tickets += value['t_content'];
+                    tickets += `</ul>`;
+                    tickets += `<a href="#" onclick="order(`+key+`);" class="btn btn-lg btn-block btn-outline-primary">我要訂票</a>`;
+                    tickets += `</div>`;
+                    tickets += `</div>`;
+                });
+                $("#ticketContent").html(tickets);
+            },
+            error: function (e) {
+                $.each(e, function (key, value) {
+                    console.log(key + ": " + value);
+                });
+            }
+        });
+    }catch (e) {
+        console.log("An error catch on $.ajax(): " + e.message);
+    }
+}
+
+function order(tid) {
+    let u_id = localStorage.getItem("u_id");
+    let u_acc = localStorage.getItem("u_acc");
+    let u_name = localStorage.getItem("u_name");
+    try{
+        $.ajax({
+            type: 'POST',
+            url: "php/orderTicket.buy.php",
+            async: false,
+            data: {
+                "u_id": u_id,
+                "u_acc": u_acc,
+                "u_name": u_name,
+                "t_id": tid
+            },
+            dataType: "text",
+            success: function (result) {
+                if(result === "noTicket"){
+                    alert("沒票囉sorry...");
+                    window.location.href = "orderTicket.List.html";
+                }else if(result === "noPOST"){
+                    window.location.href = "orderTicket.List.html";
+                }else{
+                    window.location.href = "php/orderTicket.queue.php?t_id="+result;
+                }
+            },
+            error: function (e) {
+                $.each(e, function (key, value) {
+                    console.log(key + ": " + value);
+                });
+            }
+        });
+    }catch (e) {
+        console.log("An error catch on $.ajax(): " + e.message);
+    }
 }
