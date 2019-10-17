@@ -48,8 +48,9 @@
                 try {
                     $.ajax({
                         type: 'POST',
-                        url: "config/DB_query.php",
+                        url: "config/API.php",
                         data: {
+                            "func": "select",
                             "sql": sql
                         },
                         dataType: "json",
