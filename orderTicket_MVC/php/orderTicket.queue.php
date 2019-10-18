@@ -47,7 +47,7 @@ while (true) {
         $redis->rPush($ticketName, $uid);
     } else {
         //成功搶票，停止queue，剩餘基本資料到其他地方填寫
-        $lastTicket = intval($redis->get($lastticket))-1;
+        $lastTicket = intval($redis->get($lastticket)) - 1;
         $redis->set($lastticket, $lastTicket);
         $redis->close();
         echo '<script>alert("已經完成搶票，請至個人已購訂單編輯資料");</script>';

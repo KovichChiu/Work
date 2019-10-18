@@ -32,7 +32,6 @@
     <title>Sign up</title>
 
 
-
     <style>
         html,
         body {
@@ -87,16 +86,18 @@
 </head>
 <body class="text-center">
 <form class="form-signin" method="post" onsubmit="signupSubmit();">
-    <img class="mb-4" src="img/favicon.ico" alt="" width="72" height="72">
+    <img alt="" class="mb-4" height="72" src="img/favicon.ico" width="72">
     <h1 class="h3 mb-3 font-weight-normal">SIGN UP</h1>
     <label class="sr-only" for="inputName">User Name</label>
-    <input type="text" id="inputName" class="form-control" placeholder="Name" autocomplete="off" required="required" autofocus>
+    <input autocomplete="off" autofocus class="form-control" id="inputName" placeholder="Name" required="required"
+           type="text">
     <br/>
     <label class="sr-only" for="inputAcc">User Account</label>
-    <input type="text" id="inputAcc" class="form-control" placeholder="Account" autocomplete="off" required="required">
+    <input autocomplete="off" class="form-control" id="inputAcc" placeholder="Account" required="required" type="text">
     <br/>
     <label class="sr-only" for="inputPswd">Password</label>
-    <input type="password" id="inputPswd" class="form-control" placeholder="Password" autocomplete="off" required="required">
+    <input autocomplete="off" class="form-control" id="inputPswd" placeholder="Password" required="required"
+           type="password">
     <br/>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
     <p class="mt-5 mb-3 text-muted">&copy;2019-</p>

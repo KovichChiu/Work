@@ -2,7 +2,7 @@
 include __DIR__ . '/orderTicket.php';
 session_start();
 
-if(isset($_POST['u_id']) && isset($_POST['u_acc']) && isset($_POST['u_name']) && isset($_POST['t_id'])){
+if (isset($_POST['u_id']) && isset($_POST['u_acc']) && isset($_POST['u_name']) && isset($_POST['t_id'])) {
     //呼叫Redis
     $redis = new Redis();
     $redis->connect("localhost", 6379);
@@ -28,7 +28,7 @@ if(isset($_POST['u_id']) && isset($_POST['u_acc']) && isset($_POST['u_name']) &&
 
     //設定票卷總數
     $lastticket = "ticket" . $ticket->getID();
-    if(!$redis->get($lastticket)){
+    if (!$redis->get($lastticket)) {
         $redis->set($lastticket, $ticketPics);
     }
 
@@ -45,6 +45,6 @@ if(isset($_POST['u_id']) && isset($_POST['u_acc']) && isset($_POST['u_name']) &&
 
     //關閉redis連線
     $redis->close();
-}else{
+} else {
     echo 'noPOST';
 }

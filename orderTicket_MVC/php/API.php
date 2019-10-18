@@ -36,13 +36,14 @@ function selectDB()
     echo json_encode($jsonData);
 }
 
-function signupDB(){
+function signupDB()
+{
     global $conn, $u_acc, $u_name, $u_pswd;
     $u_id = sha1($u_name . $u_acc . $u_pswd . time());
     $sql = "INSERT INTO `u_account` (`u_id`, `u_name`, `u_acc`, `u_pswd`) VALUES ('" . $u_id . "', '" . $u_name . "', '" . $u_acc . "', '" . $u_pswd . "')";
     $result = mysqli_query($conn, $sql);
     $flag = "success";
-    if(!@$result){
+    if (!@$result) {
         $flag = "error";
     }
     echo $flag;
@@ -53,7 +54,7 @@ function insertDB()
     global $conn, $sql;
     $result = mysqli_query($conn, $sql);
     $flag = "success";
-    if(!$result){
+    if (!$result) {
         $flag = "error";
     }
     echo $flag;
@@ -88,7 +89,9 @@ function sqlInject($input)
     $output = str_replace($key, "", $input);
     return $output;
 }
-function signout(){
+
+function signout()
+{
     session_start();
     session_destroy();
     echo 'success';

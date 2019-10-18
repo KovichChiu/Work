@@ -5,11 +5,11 @@ $(function () {
 
 function nav() {
     let userBar = ``;
-    if(localStorage.getItem("u_name") === null){
+    if (localStorage.getItem("u_name") === null) {
         userBar += `<li class="nav-item"><a class="nav-link" href="login.signin.html">會員登入</a></li>`;
-    }else{
+    } else {
         userBar += `<li class="nav-item dropdown">`;
-        userBar += `<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">`+localStorage.getItem("u_name")+`</a>`;
+        userBar += `<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">` + localStorage.getItem("u_name") + `</a>`;
         userBar += `<div class="dropdown-menu" aria-labelledby="dropdown01">`;
         userBar += `<a class="dropdown-item" href="#">會員資料</a>`;
         userBar += `<a class="dropdown-item" href="order.List.html">訂票內容</a>`;
@@ -40,7 +40,7 @@ function nav() {
                     <a class="nav-link" href="orderTicket.List.html">我要訂票</a>
                 </li>
             </ul>
-            <ul class="navbar-nav">`+userBar+`</ul>
+            <ul class="navbar-nav">` + userBar + `</ul>
         </div>
     </nav>
     `;
@@ -96,7 +96,7 @@ function signinSubmit() {
     return false;
 }
 
-function signupSubmit(){
+function signupSubmit() {
     let name = $("#inputName").val();
     let acc = $("#inputAcc").val();
     let pswd = $("#inputPswd").val();
@@ -113,10 +113,10 @@ function signupSubmit(){
             },
             dataType: "text",
             success: function (result) {
-                if(result === "success"){
+                if (result === "success") {
                     alert("恭喜你，註冊成功!");
                     window.location.href = "login.signin.html";
-                }else{
+                } else {
                     alert("抱歉，該帳號已經被註冊過了喔");
                     window.location.href = "login.signup.html";
                 }
@@ -154,15 +154,15 @@ function signout() {
 /* orderTicket */
 
 function checkLogin() {
-    if(localStorage.getItem("u_id") === null){
+    if (localStorage.getItem("u_id") === null) {
         alert("要先登入才能搶票喔!");
-        document.location.href="index.html";
+        document.location.href = "index.html";
     }
 }
 
 function showTicket() {
     let sql = "SELECT * FROM `ticket`";
-    try{
+    try {
         $.ajax({
             type: 'POST',
             url: "php/API.php",
@@ -174,17 +174,17 @@ function showTicket() {
             dataType: "json",
             success: function (result) {
                 let tickets = ``;
-                $.each(result, function(key, value){
+                $.each(result, function (key, value) {
                     tickets += `<div class="card mb-4 shadow-sm">`;
                     tickets += `<div class="card-header">`;
-                    tickets += `<h4 class="my-0 font-weight-normal">`+value['t_name']+`</h4>`;
+                    tickets += `<h4 class="my-0 font-weight-normal">` + value['t_name'] + `</h4>`;
                     tickets += `</div>`;
                     tickets += `<div class="card-body">`;
-                    tickets += `<h1 class="card-title pricing-card-title">$`+value['t_price']+` <small class="text-muted">/NTD</small></h1>`;
+                    tickets += `<h1 class="card-title pricing-card-title">$` + value['t_price'] + ` <small class="text-muted">/NTD</small></h1>`;
                     tickets += `<ul class="list-unstyled mt-3 mb-4">`;
                     tickets += value['t_content'];
                     tickets += `</ul>`;
-                    tickets += `<a href="#" onclick="order(`+key+`);" class="btn btn-lg btn-block btn-outline-primary">我要訂票</a>`;
+                    tickets += `<a href="#" onclick="order(` + key + `);" class="btn btn-lg btn-block btn-outline-primary">我要訂票</a>`;
                     tickets += `</div>`;
                     tickets += `</div>`;
                 });
@@ -196,7 +196,7 @@ function showTicket() {
                 });
             }
         });
-    }catch (e) {
+    } catch (e) {
         console.log("An error catch on $.ajax(): " + e.message);
     }
 }
@@ -205,7 +205,7 @@ function order(tid) {
     let u_id = localStorage.getItem("u_id");
     let u_acc = localStorage.getItem("u_acc");
     let u_name = localStorage.getItem("u_name");
-    try{
+    try {
         $.ajax({
             type: 'POST',
             url: "php/orderTicket.buy.php",
@@ -218,13 +218,13 @@ function order(tid) {
             },
             dataType: "text",
             success: function (result) {
-                if(result === "noTicket"){
+                if (result === "noTicket") {
                     alert("沒票囉sorry...");
                     window.location.href = "orderTicket.List.html";
-                }else if(result === "noPOST"){
+                } else if (result === "noPOST") {
                     window.location.href = "orderTicket.List.html";
-                }else{
-                    window.location.href = "php/orderTicket.queue.php?t_id="+result;
+                } else {
+                    window.location.href = "php/orderTicket.queue.php?t_id=" + result;
                 }
             },
             error: function (e) {
@@ -233,15 +233,15 @@ function order(tid) {
                 });
             }
         });
-    }catch (e) {
+    } catch (e) {
         console.log("An error catch on $.ajax(): " + e.message);
     }
 }
 
 /* orderList */
 function orderList() {
-    let sql = "SELECT `u`.`u_name` as `name`,`o`.`o_no` as `no`,`o`.`o_time` as `time`,`t`.`t_name` as `ticketName`,`o`.`o_tpics` as `pics` FROM `order` as `o` INNER JOIN `u_account` as `u` ON `o`.`o_uid` = `u`.`u_id` INNER JOIN `ticket` as `t` ON `o`.`o_tid` = `t`.`t_id` WHERE `o`.`o_uid` = '"+localStorage.getItem("u_id")+"'";
-    try{
+    let sql = "SELECT `u`.`u_name` as `name`,`o`.`o_no` as `no`,`o`.`o_time` as `time`,`t`.`t_name` as `ticketName`,`o`.`o_tpics` as `pics` FROM `order` as `o` INNER JOIN `u_account` as `u` ON `o`.`o_uid` = `u`.`u_id` INNER JOIN `ticket` as `t` ON `o`.`o_tid` = `t`.`t_id` WHERE `o`.`o_uid` = '" + localStorage.getItem("u_id") + "'";
+    try {
         $.ajax({
             type: 'POST',
             url: "php/API.php",
@@ -253,13 +253,13 @@ function orderList() {
             dataType: "json",
             success: function (result) {
                 let content = ``;
-                $.each(result, function(key, value){
+                $.each(result, function (key, value) {
                     content += `<tr>`;
-                    content += `<td>`+value['name']+`</td>`;
-                    content += `<td>`+value['no'].substr(0,8)+`</td>`;
-                    content += `<td>`+dateFormat(value['time'])+`</td>`;
-                    content += `<td>`+value['ticketName']+`</td>`;
-                    content += `<td>`+value['pics']+`</td>`;
+                    content += `<td>` + value['name'] + `</td>`;
+                    content += `<td>` + value['no'].substr(0, 8) + `</td>`;
+                    content += `<td>` + dateFormat(value['time']) + `</td>`;
+                    content += `<td>` + value['ticketName'] + `</td>`;
+                    content += `<td>` + value['pics'] + `</td>`;
                     content += `</tr>`;
                 });
                 $("#dt_content").html(content);
@@ -270,18 +270,18 @@ function orderList() {
                 });
             }
         });
-    }catch (e) {
+    } catch (e) {
         console.log("An error catch on $.ajax(): " + e.message);
     }
 }
 
 //時間格式化 Y-M-D H-i
-function dateFormat(time){
-    var date = new Date(time*1000);
+function dateFormat(time) {
+    var date = new Date(time * 1000);
     var Y = date.getFullYear();
-    var M = (date.getMonth()<10)?("0"+date.getMonth()):(date.getMonth());
-    var D = (date.getDate()<10)?("0"+date.getDate()):(date.getDate());
-    var H = (date.getHours()<10)?("0"+date.getHours()):(date.getHours());
-    var i = (date.getMinutes()<10)?("0"+date.getMinutes()):(date.getMinutes());
-    return Y+`-`+M+`-`+D+` `+H+`:`+i;
+    var M = (date.getMonth() < 10) ? ("0" + date.getMonth()) : (date.getMonth());
+    var D = (date.getDate() < 10) ? ("0" + date.getDate()) : (date.getDate());
+    var H = (date.getHours() < 10) ? ("0" + date.getHours()) : (date.getHours());
+    var i = (date.getMinutes() < 10) ? ("0" + date.getMinutes()) : (date.getMinutes());
+    return Y + `-` + M + `-` + D + ` ` + H + `:` + i;
 }
