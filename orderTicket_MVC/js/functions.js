@@ -13,7 +13,7 @@ function nav() {
         userBar += `<div class="dropdown-menu" aria-labelledby="dropdown01">`;
         userBar += `<a class="dropdown-item" href="#">會員資料</a>`;
         userBar += `<a class="dropdown-item" href="order.List.html">訂票內容</a>`;
-        userBar += `<a class="dropdown-item" href="#">實名認證</a>`;
+        userBar += `<a class="dropdown-item" href="#" onclick="checkVali();">實名認證</a>`;
         userBar += `<div class="dropdown-divider"></div>`;
         userBar += `<a class="dropdown-item" href="#" onclick="signout();">登出</a>`;
         userBar += `</div>`;
@@ -146,6 +146,37 @@ function signout() {
         }
     });
     location.href = "index.html";
+}
+
+function checkVali() {
+    if(localStorage.getItem("u_id") === null){
+        alert("請先登入");
+        location.href = "index.html";
+    }else{
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "php/checkVali.php",
+            data: {
+                "u_id": localStorage.getItem("u_id")
+            },
+            dataType: "text",
+            success: function (result) {
+                if(result === "false"){
+                    alert("認證失敗");
+                    location.href = "index.html";
+                }else{
+                    alert("認證成功");
+                    location.href = "index.html";
+                }
+            },
+            error: function (e) {
+                $.each(e, function (key, value) {
+                    console.log(key + ": " + value);
+                });
+            }
+        });
+    }
 }
 
 /* orderTicket */
