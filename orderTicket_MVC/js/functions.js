@@ -6,7 +6,7 @@ $(function () {
 function nav() {
     let userBar = ``;
     if (localStorage.getItem("u_name") === null) {
-        userBar += `<li class="nav-item"><a class="nav-link" href="login.signin.html">會員登入</a></li>`;
+        userBar += `<li class="nav-item  active"><a class="nav-link" href="login.signin.html">會員登入</a></li>`;
     } else {
         userBar += `<li class="nav-item dropdown">`;
         userBar += `<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">` + localStorage.getItem("u_name") + `</a>`;
@@ -31,13 +31,10 @@ function nav() {
         <div class="navbar-collapse collapse" id="navbarsExampleDefault" style="">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">首頁 <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.html">首頁 <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">演唱會資訊</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="orderTicket.List.html">我要訂票</a>
+                    <a class="nav-link active" href="orderTicket.List.html">我要訂票</a>
                 </li>
             </ul>
             <ul class="navbar-nav">` + userBar + `</ul>
@@ -279,7 +276,7 @@ function orderList() {
 function dateFormat(time) {
     var date = new Date(time * 1000);
     var Y = date.getFullYear();
-    var M = (date.getMonth() < 10) ? ("0" + date.getMonth()) : (date.getMonth());
+    var M = (date.getMonth() + 1 < 10) ? ("0" + date.getMonth() + 1) : (date.getMonth() + 1);
     var D = (date.getDate() < 10) ? ("0" + date.getDate()) : (date.getDate());
     var H = (date.getHours() < 10) ? ("0" + date.getHours()) : (date.getHours());
     var i = (date.getMinutes() < 10) ? ("0" + date.getMinutes()) : (date.getMinutes());

@@ -25,10 +25,12 @@ while (true) {
 
     //redis不能太長 所以取前9位hash值比對
     $sessionUID = substr($_SESSION['u_id'], 0, 9);
-    $redisUID = substr($redis->lIndex($ticketName, 0), 0, 9);
-    if ($sessionUID == $redisUID) {
-        $uid = $redis->lPop($ticketName);
-    } else {
+    $uid = $redis->lPop($ticketName);
+    $redisUID = substr($uid, 0, 9);
+
+    //比對 //若不是自己則塞回去
+    if ($sessionUID != $redisUID) {
+        $redis->rPush($ticketName, $uid);
         sleep(2);
         continue;
     }
