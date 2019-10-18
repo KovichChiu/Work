@@ -112,10 +112,10 @@ function signupSubmit() {
             success: function (result) {
                 if (result === "success") {
                     alert("恭喜你，註冊成功!");
-                    window.location.href = "login.signin.html";
+                    location.href = "login.signin.html";
                 } else {
                     alert("抱歉，該帳號已經被註冊過了喔");
-                    window.location.href = "login.signup.html";
+                    location.href = "login.signup.html";
                 }
             },
             error: function (e) {

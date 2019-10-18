@@ -40,6 +40,7 @@ function signupDB()
 {
     global $conn, $u_acc, $u_name, $u_pswd;
     $u_id = sha1($u_name . $u_acc . $u_pswd . time());
+    $u_pswd = hash("sha512", sqlInject($u_pswd));
     $sql = "INSERT INTO `u_account` (`u_id`, `u_name`, `u_acc`, `u_pswd`) VALUES ('" . $u_id . "', '" . $u_name . "', '" . $u_acc . "', '" . $u_pswd . "')";
     $result = mysqli_query($conn, $sql);
     $flag = "success";
