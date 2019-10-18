@@ -17,9 +17,12 @@
 ![流程圖4](https://lh3.googleusercontent.com/Gnf2jS-aFrbmi_lXpKZ_cev98Qa-IxCi0x1inHuQTxyWLvFl5sZwn00F-8BXMUOgpIes7zf4HkFV=w800)
 
 ## 工作進度
-|    Date    |  Content  | Programer 
-| ---------- | --------- | --------- 
-|  20191016  | 初始化專案  | 頎夫
+|    Date       |  Content  | Programer 
+| ------------- | --------- | --------- 
+|  20191016 下午 | 初始化專案  | 頎夫
+|  20191017 上午 |  登入系統   | 頎夫
+|  20191017 下午 |  搶票系統   | 頎夫
+|  20191018 上午 |  搶票系統   | 頎夫
 
 ## Lisence  
 ![CC-BY](https://i.creativecommons.org/l/by/4.0/88x31.png)  
