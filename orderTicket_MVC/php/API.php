@@ -17,6 +17,9 @@ switch ($func) {
     case "insert":
         insertDB();
         break;
+    case "signout":
+        signout();
+        break;
     default:
         break;
 }
@@ -84,4 +87,9 @@ function sqlInject($input)
     );
     $output = str_replace($key, "", $input);
     return $output;
+}
+function signout(){
+    session_start();
+    session_destroy();
+    echo 'success';
 }

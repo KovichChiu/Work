@@ -12,7 +12,7 @@ function nav() {
         userBar += `<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">`+localStorage.getItem("u_name")+`</a>`;
         userBar += `<div class="dropdown-menu" aria-labelledby="dropdown01">`;
         userBar += `<a class="dropdown-item" href="#">會員資料</a>`;
-        userBar += `<a class="dropdown-item" href="#">訂票內容</a>`;
+        userBar += `<a class="dropdown-item" href="order.List.html">訂票內容</a>`;
         userBar += `<a class="dropdown-item" href="#">實名認證</a>`;
         userBar += `<div class="dropdown-divider"></div>`;
         userBar += `<a class="dropdown-item" href="#" onclick="signout();">登出</a>`;
@@ -136,7 +136,19 @@ function signupSubmit(){
 function signout() {
     localStorage.clear();
     alert("登出!");
-    location.reload();
+    $.ajax({
+        async: false,
+        url: "php/API.php",
+        data: {
+            "func": "signout"
+        },
+        error: function (e) {
+            $.each(e, function (key, value) {
+                console.log(key + ": " + value);
+            });
+        }
+    });
+    location.href = "index.html";
 }
 
 /* orderTicket */
@@ -224,4 +236,52 @@ function order(tid) {
     }catch (e) {
         console.log("An error catch on $.ajax(): " + e.message);
     }
+}
+
+/* orderList */
+function orderList() {
+    let sql = "SELECT `u`.`u_name` as `name`,`o`.`o_no` as `no`,`o`.`o_time` as `time`,`t`.`t_name` as `ticketName`,`o`.`o_tpics` as `pics` FROM `order` as `o` INNER JOIN `u_account` as `u` ON `o`.`o_uid` = `u`.`u_id` INNER JOIN `ticket` as `t` ON `o`.`o_tid` = `t`.`t_id` WHERE `o`.`o_uid` = '"+localStorage.getItem("u_id")+"'";
+    try{
+        $.ajax({
+            type: 'POST',
+            url: "php/API.php",
+            async: false,
+            data: {
+                "func": "select",
+                "sql": sql
+            },
+            dataType: "json",
+            success: function (result) {
+                let content = ``;
+                $.each(result, function(key, value){
+                    content += `<tr>`;
+                    content += `<td>`+value['name']+`</td>`;
+                    content += `<td>`+value['no'].substr(0,8)+`</td>`;
+                    content += `<td>`+dateFormat(value['time'])+`</td>`;
+                    content += `<td>`+value['ticketName']+`</td>`;
+                    content += `<td>`+value['pics']+`</td>`;
+                    content += `</tr>`;
+                });
+                $("#dt_content").html(content);
+            },
+            error: function (e) {
+                $.each(e, function (key, value) {
+                    console.log(key + ": " + value);
+                });
+            }
+        });
+    }catch (e) {
+        console.log("An error catch on $.ajax(): " + e.message);
+    }
+}
+
+//時間格式化 Y-M-D H-i
+function dateFormat(time){
+    var date = new Date(time*1000);
+    var Y = date.getFullYear();
+    var M = (date.getMonth()<10)?("0"+date.getMonth()):(date.getMonth());
+    var D = (date.getDate()<10)?("0"+date.getDate()):(date.getDate());
+    var H = (date.getHours()<10)?("0"+date.getHours()):(date.getHours());
+    var i = (date.getMinutes()<10)?("0"+date.getMinutes()):(date.getMinutes());
+    return Y+`-`+M+`-`+D+` `+H+`:`+i;
 }
