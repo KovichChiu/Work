@@ -149,10 +149,10 @@ function signout() {
 }
 
 function checkVali() {
-    if(localStorage.getItem("u_id") === null){
+    if (localStorage.getItem("u_id") === null) {
         alert("請先登入");
         location.href = "index.html";
-    }else{
+    } else {
         $.ajax({
             type: "POST",
             async: false,
@@ -162,10 +162,10 @@ function checkVali() {
             },
             dataType: "text",
             success: function (result) {
-                if(result === "false"){
+                if (result === "false") {
                     alert("認證失敗");
                     location.href = "index.html";
-                }else{
+                } else {
                     alert("認證成功");
                     location.href = "index.html";
                 }
@@ -246,14 +246,20 @@ function order(tid) {
             },
             dataType: "text",
             success: function (result) {
-                if (result === "noTicket") {
-                    alert("沒票囉sorry...");
-                    window.location.href = "orderTicket.List.html";
-                } else if (result === "noPOST") {
-                    window.location.href = "orderTicket.List.html";
-                } else {
-                    window.location.href = "php/orderTicket.queue.php?t_id=" + result;
+                let returnText = "";
+                switch (result) {
+                    case "success":
+                        returnText = "新增成功";
+                        break;
+                    case "noPOST":
+                        returnText = "error";
+                        break;
+                    case "noTicket":
+                        returnText = "已經被搶完了！";
+                        break;
                 }
+                alert(returnText);
+                location.href = "orderTicket.list.html"
             },
             error: function (e) {
                 $.each(e, function (key, value) {
@@ -268,7 +274,8 @@ function order(tid) {
 
 /* orderList */
 function orderList() {
-    let sql = "SELECT `u`.`u_name` as `name`,`o`.`o_no` as `no`,`o`.`o_time` as `time`,`t`.`t_name` as `ticketName`,`o`.`o_tpics` as `pics` FROM `order` as `o` INNER JOIN `u_account` as `u` ON `o`.`o_uid` = `u`.`u_id` INNER JOIN `ticket` as `t` ON `o`.`o_tid` = `t`.`t_id` WHERE `o`.`o_uid` = '" + localStorage.getItem("u_id") + "'";
+    let sql = "SELECT `u`.`u_name` as `name`,`o`.`o_no` as `no`,`o`.`o_time` as `time`,`t`.`t_name` as `ticketName`,`o`.`o_tpics` as `pics` FROM `order` as `o` INNER JOIN `u_account` as `u` ON `o`.`o_uid` = `u`.`u_id` INNER JOIN `ticket` as `t` ON `o`.`o_tid` = `t`.`t_id` WHERE `o`.`o_uid` = '" + localStorage.getItem("u_id") + "' ORDER BY `time` DESC";
+    console.log(sql);
     try {
         $.ajax({
             type: 'POST',
@@ -303,7 +310,7 @@ function orderList() {
     }
 }
 
-//時間格式化 Y-M-D H-i
+//時間格式化 Y-M-D H-i-s
 function dateFormat(time) {
     var date = new Date(time * 1000);
     var Y = date.getFullYear();
@@ -311,5 +318,6 @@ function dateFormat(time) {
     var D = (date.getDate() < 10) ? ("0" + date.getDate()) : (date.getDate());
     var H = (date.getHours() < 10) ? ("0" + date.getHours()) : (date.getHours());
     var i = (date.getMinutes() < 10) ? ("0" + date.getMinutes()) : (date.getMinutes());
-    return Y + `-` + M + `-` + D + ` ` + H + `:` + i;
+    var s = (date.getSeconds() < 10) ? ("0" + date.getSeconds()) : (date.getSeconds());
+    return Y + `-` + M + `-` + D + ` ` + H + `:` + i + `:` + s;
 }

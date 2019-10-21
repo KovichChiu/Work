@@ -1,5 +1,5 @@
 <?php
-include __DIR__.'/../config/config.php';
+include __DIR__ . '/../config/config.php';
 
 $u_id = $_POST['u_id'];
 
@@ -7,15 +7,15 @@ $vali = true;
 
 //maincode
 
-if(!false){
+if (!false) {
     $sql = "Update `u_account` SET `u_vali` = '1' WHERE `u_id` = '{$u_id}'";
     $result = mysqli_query($conn, $sql);
-    if(!$result){
+    if (!$result) {
         $vali = false;
     }
-}else{
+} else {
     $vali = false;
 }
-echo ($vali)?("true"):("false");
+echo ($vali) ? ("true") : ("false");
 
 
