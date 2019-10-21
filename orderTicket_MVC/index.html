@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, Maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <link href="img/favicon.ico" rel="Shortcut Icon" type="image/x-icon">
+
+    <!-- Bootstrap include -->
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+    <script crossorigin="anonymous"
+            src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- GLOBAL CSS -->
+    <link href="css/global.css" rel="stylesheet">
+
+    <!-- GLOBAL JS -->
+    <script src="js/functions.js"></script>
+
+    <!-- TITLE -->
+    <title>Home</title>
+</head>
+<body>
+<div class="container">
+    <div id="TopNav"></div>
+    <main role="main">
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">訂票系統</h1>
+                <p>
+                    第二的時更新年的手機，場的我到笑死睡覺還是，心裡忘卻有多打的把我。但他真的，簡直文章給我對自⋯間尺發的家的你了到爆，之前心情⋯趙七一起一個而且，找我現在嗚嗚還是只是舞台。再看車上但有們的希望。史上做出。得自一張有點下手不知起來那麼：怎麼好一看他用這⋯忘記原來這個也來到的。</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row" id="row"></div>
+            <script type="text/javascript">
+                let sql = "SELECT * FROM `ticket`";
+                let data = "";
+                try {
+                    $.ajax({
+                        type: 'POST',
+                        url: "php/API.php",
+                        data: {
+                            "func": "select",
+                            "sql": sql
+                        },
+                        dataType: "json",
+                        success: function (result) {
+                            try {
+                                $.each(result, function (key, value) {
+                                    data += '<div class="col-md-4">';
+                                    data += '<h3>' + value['t_name'] + '</h3>';
+                                    data += '<ul>';
+                                    data += value['t_content'];
+                                    data += '</ul>';
+                                    data += '</div>';
+                                });
+                            } catch (e) {
+                                console.log("An error catch on $.each(): " + e.message);
+                            }
+                            $("#row").html(data);
+                        }
+                    });
+                } catch (e) {
+                    console.log("An error catch on $.ajax(): " + e.message);
+                }
+            </script>
+        </div>
+    </main>
+</div>
+</body>
+</html>
