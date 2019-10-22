@@ -44,6 +44,39 @@ function nav() {
     $("#TopNav").html(navItem);
 }
 
+function indexList() {
+    let sql = "SELECT * FROM `ticket`";
+    let data = "";
+    try {
+        $.ajax({
+            type: 'POST',
+            url: "php/API.php",
+            data: {
+                "func": "select",
+                "sql": sql
+            },
+            dataType: "json",
+            success: function (result) {
+                try {
+                    $.each(result, function (key, value) {
+                        data += '<div class="col-md-4">';
+                        data += '<h3>' + value['t_name'] + '</h3>';
+                        data += '<ul>';
+                        data += value['t_content'];
+                        data += '</ul>';
+                        data += '</div>';
+                    });
+                } catch (e) {
+                    console.log("An error catch on $.each(): " + e.message);
+                }
+                $("#row").html(data);
+            }
+        });
+    } catch (e) {
+        console.log("An error catch on $.ajax(): " + e.message);
+    }
+}
+
 function signinSubmit() {
     let Acc = $("#inputAcc").val();
     let pswd = $("#inputpswd").val();

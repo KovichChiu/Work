@@ -52,7 +52,7 @@ if (isset($_POST['u_id']) && isset($_POST['u_acc']) && isset($_POST['u_name']) &
                 $time = time();
 
                 //訂單號
-                $orderingNO = makeOrderingNO($time);
+                $orderingNO = makeOrderingNO($time, $u_id);
 
                 //新增到DB
                 $sql = "INSERT INTO `order` (`o_no`, `o_time`, `o_uid`, `o_tid`, `o_tpics`) VALUES ('{$orderingNO}', {$time}, '{$u_id}', {$t_id},1)";
@@ -80,8 +80,8 @@ if (isset($_POST['u_id']) && isset($_POST['u_acc']) && isset($_POST['u_name']) &
     echo 'noPOST';
 }
 
-function makeOrderingNO($time)
+function makeOrderingNO($time, $u_id)
 {
-    $stamp = $time . $_SESSION['u_id'];
+    $stamp = $time . $u_id;
     return hash("sha256", $stamp);
 }
