@@ -4,9 +4,10 @@
 
 
 ## 作業清單 Working List
-|     |   Project     | Date       | Programer  
-| --- | ------------- | ---------- | ---------  
-|  1  |   Game_1A2B   | 2019/09/09 | Chi-Fu  
-|  2  |      API      | 2019/10/07 | Chi-Fu  
-|  3  |  orderTicket  | 2019/10/08 | Chi-Fu
-|  4  |orderTicket_MVC| 2019/10/16 | Chi-Fu
+|     |     Project       | Date       | Programer  
+| --- | ----------------- | ---------- | ---------  
+|  1  |     Game_1A2B     | 2019/09/09 | Chi-Fu  
+|  2  |        API        | 2019/10/07 | Chi-Fu  
+|  3  |    orderTicket    | 2019/10/08 | Chi-Fu
+|  4  |  orderTicket_MVC  | 2019/10/16 | Chi-Fu
+|  5  |orderTicket_Laravel| 2019/10/23 | Chi-Fu
