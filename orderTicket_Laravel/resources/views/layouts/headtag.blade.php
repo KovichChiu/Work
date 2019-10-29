@@ -25,9 +25,5 @@
     <!-- TITLE -->
     <title>@yield('page_Title')</title>
 
-    <script type="text/javascript">
-        $(function () {
-            indexList();
-        });
-    </script>
+    <script type="text/javascript" src="{!! asset('js/functions.js') !!}"></script>
 </head>

@@ -25,8 +25,14 @@
                         </ul>
                         <form action="{{url('buyQueue')}}" method="post">
                             {{ csrf_field() }}
-                            <button class="btn btn-lg btn-block btn-outline-primary" type="submit" name="tid" value="{{$values['t_id']}}">我要訂票</button>
+                            <button class="btn btn-lg btn-block btn-outline-primary"
+                                    data-toggle="tooltip{{$values['t_id']}}" onmouseover="soc({{$values['t_id']}})"
+                                    type="submit" data-placement="bottom" name="tid" value="{{$values['t_id']}}">我要訂票
+                            </button>
                         </form>
+                        <script>
+                            soc({{$values['t_id']}});
+                        </script>
                     </div>
                 </div>
             @endforeach

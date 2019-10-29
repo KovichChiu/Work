@@ -21,6 +21,8 @@ Route::get('/chVali', 'pagesController@chVali');
 Route::view('/login', 'login')->name('loginForm');
 Route::POST('/login', 'signController@login')->name('loginProcess');
 
+Route::POST('/cli', 'socketController@soc_Cli');
+
 Route::view('/signup', 'signup')->name('signupForm');
 Route::POST('/signup', 'signController@signup')->name('signupProcess');
 
