@@ -23,16 +23,10 @@
                         <ul class="list-unstyled mt-3 mb-4">
                             {!! $values['t_content'] !!}
                         </ul>
-                        <form action="{{url('buyQueue')}}" method="post">
-                            {{ csrf_field() }}
-                            <button class="btn btn-lg btn-block btn-outline-primary"
-                                    data-toggle="tooltip{{$values['t_id']}}" onmouseover="soc({{$values['t_id']}})"
-                                    type="submit" data-placement="bottom" name="tid" value="{{$values['t_id']}}">我要訂票
-                            </button>
-                        </form>
-                        <script>
-                            soc({{$values['t_id']}});
-                        </script>
+
+                        <a class="btn btn-outline-primary" data-toggle="tooltip{{$values['t_id']}}" href="{{url('/orderQueue/'.$values['t_id'])}}">
+                            我要訂票
+                        </a>
                     </div>
                 </div>
             @endforeach

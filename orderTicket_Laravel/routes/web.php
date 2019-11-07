@@ -10,20 +10,24 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'pagesController@home');
-Route::get('/buyPages', 'pagesController@buyPages');
 
-Route::post('/buyQueue', 'pagesController@buyQueue')->name('buyQueue');
+Route::get('/', 'home');
 
-Route::get('/order', 'pagesController@order');
-Route::get('/chVali', 'pagesController@chVali');
+Route::get('/orderList', 'orderList');
+Route::get('/orderQueue/{id}', 'orderQueue');
 
-Route::view('/login', 'login')->name('loginForm');
-Route::POST('/login', 'signController@login')->name('loginProcess');
+Route::get('/order', 'orderShow');
+
+//Route::get('/chVali', 'pagesController@chVali');
+
+Route::view('/login', 'login');
+Route::POST('/login', 'UserController@login');
 
 Route::POST('/cli', 'socketController@soc_Cli');
 
-Route::view('/signup', 'signup')->name('signupForm');
-Route::POST('/signup', 'signController@signup')->name('signupProcess');
+Route::view('/signup', 'signup');
+Route::POST('/signup', 'UserController@signup');
 
-Route::get('/logout', 'signController@logout');
+Route::get('/logout', 'UserController@logout');
+
+

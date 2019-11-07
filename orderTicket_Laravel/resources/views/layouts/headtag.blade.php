@@ -18,12 +18,11 @@
 
     <style>
         body {
-            font-family: Microsoft JhengHei, fantasy, monospace;
+            font-family: Microsoft JhengHei, fantasy, monospace !important;
         }
     </style>
 
     <!-- TITLE -->
     <title>@yield('page_Title')</title>
 
-    <script type="text/javascript" src="{!! asset('js/functions.js') !!}"></script>
 </head>

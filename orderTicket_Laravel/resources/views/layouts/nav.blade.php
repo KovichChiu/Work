@@ -14,7 +14,7 @@
                 <a class="nav-link" href="{{ url('/') }}">首頁 <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="{{url('/buyPages')}}">我要訂票</a>
+                <a class="nav-link active" href="{{url('/orderList')}}">我要訂票</a>
             </li>
         </ul>
         <ul class="navbar-nav">

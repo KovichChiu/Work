@@ -10,7 +10,7 @@
         訂購清單
     </h1>
     <hr>
-    <table cellspacing="0" class="table table-striped table-bordered" id="dt" width="100%">
+    <table class="table table-striped table-bordered" style="width:100%" id="dt">
         <thead>
         <tr>
             <th class="th-sm">訂購人</th>
@@ -21,13 +21,13 @@
         </tr>
         </thead>
         <tbody id="dt_content">
-        @foreach(json_decode($data) as $value)
+        @foreach($data as $value)
             <tr>
-                <td>{{$value->name}}</td>
-                <td>{{substr($value->no, 0, 8)}}</td>
-                <td>{{date("Y-m-d H:i:s", $value->time)}}</td>
-                <td>{{$value->ticketName}}</td>
-                <td>{{$value->pics}}</td>
+                <td>{{$value->user->u_name}}</td>
+                <td>{{substr($value->o_no, 0, 8)}}</td>
+                <td>{{date("Y-m-d H:i:s", $value->o_time)}}</td>
+                <td>{{$value->ticket->t_name}}</td>
+                <td>{{$value->o_tpics}}</td>
             </tr>
         @endforeach
         </tbody>

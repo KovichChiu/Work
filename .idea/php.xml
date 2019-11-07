@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/API/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/API/vendor/phpseclib/phpseclib" />
+      <path value="$PROJECT_DIR$/API/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/API/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/API/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/API/vendor/google/apiclient-services" />
+      <path value="$PROJECT_DIR$/API/vendor/composer" />
+      <path value="$PROJECT_DIR$/API/vendor/google/apiclient" />
+      <path value="$PROJECT_DIR$/API/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/API/vendor/google/auth" />
+      <path value="$PROJECT_DIR$/API/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/API/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/API/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/API/vendor/monolog/monolog" />
+    </include_path>
+  </component>
+</project>
