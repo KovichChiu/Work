@@ -16,7 +16,7 @@ function ck_Vali()
     }
 }
 
-/*
+/**
  * SQL injection過濾
  */
 function sqlInject($input)

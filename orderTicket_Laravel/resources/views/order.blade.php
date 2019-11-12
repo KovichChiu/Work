@@ -23,7 +23,7 @@
         <tbody id="dt_content">
         @foreach($data as $value)
             <tr>
-                <td>{{$value->user->u_name}}</td>
+                <td>{{ $value->user->u_name }}</td>
                 <td>{{substr($value->o_no, 0, 8)}}</td>
                 <td>{{date("Y-m-d H:i:s", $value->o_time)}}</td>
                 <td>{{$value->ticket->t_name}}</td>

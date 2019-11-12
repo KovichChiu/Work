@@ -32,8 +32,7 @@ class Order extends Model
     public function user()
     {
         $uid = Session::get('u_id');
-        return $this->belongsTo('App\User', 'o_uid', 'u_id')
-                    ->where('u_id', '=', $uid);
+        return $this->belongsTo('App\User', 'o_uid', 'u_id')->where('u_id', '=', $uid);
     }
 
     public function ticket()

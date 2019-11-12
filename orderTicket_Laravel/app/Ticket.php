@@ -17,6 +17,6 @@ class Ticket extends Model
 
     public function existsTicket($tid)
     {
-        return $this->where("t_id", $tid)->exists();
+        echo $this->where("t_id", $tid)->exists();
     }
 }

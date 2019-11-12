@@ -13,7 +13,11 @@ class home extends Controller
 
     protected function getData()
     {
-        $ticket = Ticket::all();
+        $arr = [
+            't_name',
+            't_content',
+        ];
+        $ticket = Ticket::all($arr);
         return $ticket;
     }
 }

@@ -10,18 +10,18 @@ class UserController extends Controller
 {
     public function login(Request $request)
     {
-        $u_acc = $request->input("acc");
-        $u_pswd = hash('sha512', $request->input("pswd"));
+        $u_acc = $request->acc;
+        $u_pswd = hash('sha512', $request->pswd);
 
         $user = new User;
-        $user = $user->checkLogin($u_acc);
+        $user = $user->checkLogin($u_acc, $u_pswd);
 
         $content = "登入失敗，請重新登入";
         $href = "/login";
 
-        if ($user !== null || @$user->u_pswd === $u_pswd) {
+        if ($user !== null) {
             Session::put('u_id', $user->u_id);
-            Session::put('u_acc', $user->u_acc);
+            Session::put('u_acc', $u_acc);
             Session::put('u_name', $user->u_name);
             $content = "登入成功";
             $href = "/";
@@ -42,8 +42,11 @@ class UserController extends Controller
         if (!$user->checkAccExists($u_acc)) {
             $u_id = sha1($u_name . $u_acc . $u_pswd . time());
             $user->addAccount($u_id, $u_name, $u_acc, $u_pswd);
-            $content = "註冊成功";
-            $href = "/login";
+            Session::put('u_id', $user->u_id);
+            Session::put('u_acc', $u_acc);
+            Session::put('u_name', $user->u_name);
+            $content = "註冊成功，已成功登入";
+            $href = "/";
         }
         return view('alerts/Message', ['content' => $content, 'href' => $href]);
     }

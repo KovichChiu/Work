@@ -1,4 +1,4 @@
 <script>
     alert('{{$content}}');
-    location.href='{{url($href)}}';
+    location.href = '{{url($href)}}';
 </script>

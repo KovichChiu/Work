@@ -10,8 +10,9 @@ class User extends Model
     protected $table = 'u_account';
     protected $primaryKey = 'u_acc';
 
-    public function checkLogin($acc){
-        return $this->where('u_acc', '=', $acc)->first();
+    public function checkLogin($acc, $pswd)
+    {
+        return $this->where('u_acc', $acc)->where('u_pswd', $pswd)->first();
     }
 
     public function checkAccExists($acc)

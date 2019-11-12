@@ -14,20 +14,16 @@
 Route::get('/', 'home');
 
 Route::get('/orderList', 'orderList')->middleware('verifyLogIn');
-Route::get('/orderQueue/{id}', 'orderQueue')->middleware('VerifyTicket');
+Route::get('/orderQueue/{id}', 'orderQueue')->middleware('verifyLogIn', 'VerifyTicket');
 
 Route::get('/order', 'orderShow')->middleware('verifyLogIn');
 
-//Route::get('/CheckVerify', 'pagesController@chVali');
-
 Route::view('/login', 'login');
-Route::POST('/login', 'UserController@login');
-
-Route::POST('/cli', 'socketController@soc_Cli');
+Route::POST('/login', 'UserController@login')->middleware('VerifyAccPswd');
 
 Route::view('/signup', 'signup');
-Route::POST('/signup', 'UserController@signup');
+Route::POST('/signup', 'UserController@signup')->middleware('VerifyAccPswd');
 
-Route::get('/logout', 'UserController@logout');
+Route::get('/logout', 'UserController@logout')->middleware('verifyLogIn');
 
 
