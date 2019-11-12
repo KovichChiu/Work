@@ -8,15 +8,15 @@ use Illuminate\Support\Facades\Session;
 
 class orderQueue extends Controller
 {
-    public function __invoke($id)
+    public function __invoke($tid)
     {
-        $tid = $id;
+        $flag = true;
+        $content = "";
         if (isset($tid) && $this->isLogin()) {
             //接資料
             $u_id = Session::get('u_id');
-
             $redis = app('redis.connection');
-            $ticket = Ticket::where("t_id", $tid)->first();
+            $ticket = (new Ticket)->getTicket($tid);
 
             $r_Listkey = $ticket->t_name;    //redis list名(列隊1)
             $r_Listnum = "Listnum" . $tid;       //redis list名(列隊2)
@@ -37,13 +37,11 @@ class orderQueue extends Controller
                 //若加入後超過長度則拔除
                 if ($redis->lLen($r_Listnum) > $t_allPics) {
                     $redis->rPop($r_Listnum);
-                    return "<script>alert('票券已售罄！');location.href = '" . url('/orderList') . "';</script>";
-                } else {
-                    echo $redis->lLen($r_Listnum);
+                    $content = "票券已售罄";
+                    $flag = false;
                 }
 
-                $while_Loop = true;
-                while ($while_Loop) {
+                while ($flag) {
                     //從列隊第一個撈值比對(取前10位)
                     $tmpUID = substr($redis->lIndex($r_Listkey, 0), 0, 10);
                     $UID = substr($u_id, 0, 10);
@@ -59,13 +57,7 @@ class orderQueue extends Controller
 
                         //新增到DB
                         $order = new Order;
-                        $order->o_no = $orderingNO;
-                        $order->o_time = $time;
-                        $order->o_uid = $u_id;
-                        $order->o_tid = $tid;
-                        $order->o_tpics = 1;
-
-                        if (!$order->save()) {
+                        if (!$order->addOrder($orderingNO, $time, $u_id, $tid, 1)) {
                             sleep(0.5);
                             continue;
                         } else {
@@ -77,14 +69,15 @@ class orderQueue extends Controller
                             $redis->set($r_Remkey, $t_Remainings);
                             $redis->lPop($r_Listkey);
                             $redis->close();
-                            $while_Loop = false;
-                            return "<script>alert('恭喜搶票成功喔！');location.href = '" . url('/orderList') . "';</script>";
+                            $content = "恭喜搶票成功喔！";
+                            $flag = false;
                         }
                     }
                 }
             } else {
-                return "<script>alert('票券已售罄！');location.href = '" . url('/orderList') . "';</script>";
+                $content = "票券已售罄！";
             }
+            return view('alerts/Message', ['content' => $content, 'href' => '/orderList']);
 
         } else {
             return abort(403, "STAFF ONLY, Do Not Do ANYTHING ILLEGAL!!");

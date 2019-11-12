@@ -8,7 +8,7 @@ class orderShow extends Controller
 {
     public function __invoke()
     {
-        $order = Order::with('user', 'ticket')->orderBy('o_time', 'DESC')->get();
-        return view('order', ['data' => $order]);
+        $order = new Order;
+        return view('order', ['data' => $order->getOrder()]);
     }
 }

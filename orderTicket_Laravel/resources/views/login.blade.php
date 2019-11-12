@@ -60,6 +60,12 @@
 
 {{--contain--}}
 @section('contain')
+    @if(isset($verify) && $verify)
+        <script>
+            alert('帳號密碼輸入錯誤，請重新輸入！');
+            location.href( {{ url('/') }} );
+        </script>
+    @endif
     <form class="form-signin" method="POST" action="{{url('/login')}}">
         {{ csrf_field() }}
         <img alt="" class="mb-4" height="72" src="img/favicon.ico" width="72">

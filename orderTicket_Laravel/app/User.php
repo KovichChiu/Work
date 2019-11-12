@@ -10,8 +10,21 @@ class User extends Model
     protected $table = 'u_account';
     protected $primaryKey = 'u_acc';
 
-    public function order()
+    public function checkLogin($acc){
+        return $this->where('u_acc', '=', $acc)->first();
+    }
+
+    public function checkAccExists($acc)
     {
-        return $this->hasMany('App\Order', 'o_uid', 'u_id');
+        return $this->where('u_acc', '=', $acc)->exists();
+    }
+
+    public function addAccount($u_id, $u_name, $u_acc, $u_pswd)
+    {
+        $this->u_id = $u_id;
+        $this->u_name = $u_name;
+        $this->u_acc = $u_acc;
+        $this->u_pswd = hash('sha512', $u_pswd);
+        $this->save();
     }
 }

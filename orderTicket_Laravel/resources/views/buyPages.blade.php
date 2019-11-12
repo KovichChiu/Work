@@ -23,8 +23,8 @@
                         <ul class="list-unstyled mt-3 mb-4">
                             {!! $values['t_content'] !!}
                         </ul>
-
-                        <a class="btn btn-outline-primary" data-toggle="tooltip{{$values['t_id']}}" href="{{url('/orderQueue/'.$values['t_id'])}}">
+                        <a class="btn btn-outline-primary" data-toggle="tooltip{{$values['t_id']}}"
+                           href="{{url('/orderQueue/'.$values['t_id'])}}">
                             我要訂票
                         </a>
                     </div>

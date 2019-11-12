@@ -10,8 +10,13 @@ class Ticket extends Model
     protected $table = 'ticket';
     protected $primaryKey = 't_id';
 
-    public function order()
+    public function getTicket($tid)
     {
-        return $this->hasMany('App\Order', 'o_tid', 't_id');
+        return $this->where("t_id", $tid)->first();
+    }
+
+    public function existsTicket($tid)
+    {
+        return $this->where("t_id", $tid)->exists();
     }
 }
