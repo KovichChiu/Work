@@ -7,16 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     public $timestamps = false;
-    protected $table = 'ticket';
-    protected $primaryKey = 't_id';
+    public $incrementing = false;
+    protected $primaryKey = 'tid';
 
     public function getTicket($tid)
     {
-        return $this->where("t_id", $tid)->first();
+        return $this->where("tid",'=', $tid)->first();
     }
 
     public function existsTicket($tid)
     {
-        echo $this->where("t_id", $tid)->exists();
+        return $this->where("tid",'=', $tid)->exists();
     }
 }

@@ -17,9 +17,9 @@
         <div class="row">
             @foreach($data as $values)
                 <div class="col-md-4">
-                    <h3>{{$values['t_name']}}</h3>
+                    <h3>{{$values['tname']}}</h3>
                     <ul>
-                        {!!$values['t_content']!!}
+                        {!!$values['tcontent']!!}
                     </ul>
                 </div>
 

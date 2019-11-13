@@ -27,3 +27,6 @@ Route::POST('/signup', 'UserController@signup')->middleware('VerifyAccPswd');
 Route::get('/logout', 'UserController@logout')->middleware('verifyLogIn');
 
 
+Route::get('/test', function(){});
+
+

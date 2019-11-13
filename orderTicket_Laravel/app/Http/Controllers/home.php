@@ -14,8 +14,8 @@ class home extends Controller
     protected function getData()
     {
         $arr = [
-            't_name',
-            't_content',
+            'tname',
+            'tcontent',
         ];
         $ticket = Ticket::all($arr);
         return $ticket;

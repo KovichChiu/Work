@@ -8,35 +8,43 @@ use Illuminate\Support\Facades\Session;
 class Order extends Model
 {
     public $timestamps = false;
-    protected $table = 'order';
-    protected $primaryKey = 'o_id';
+    public $incrementing = false;
+    protected $primaryKey = 'oid';
 
     /**
      * 算出關聯
      */
     public function getOrder()
     {
-        return $this->with('user', 'ticket')->orderBy('o_time', 'DESC')->get();
+        $uid = Session::get('uid');
+        return $this->with('user', 'ticket')->where('uid', $uid)->orderBy('otime', 'DESC')->get();
     }
 
-    public function addOrder($orderingNO, $time, $u_id, $tid, $tpic)
+    public function addOrder($tid)
     {
-        $this->o_no = $orderingNO;
-        $this->o_time = $time;
-        $this->o_uid = $u_id;
-        $this->o_tid = $tid;
-        $this->o_tpics = $tpic;
+        $uid = Session::get('uid');
+        $this->otime = time();
+        $this->oid = $this->makeOrderID($this->otime, $uid);
+        $this->uid = $uid;
+        $this->tid = $tid;
+        $this->opics = 1;
         return $this->save();
     }
 
     public function user()
     {
-        $uid = Session::get('u_id');
-        return $this->belongsTo('App\User', 'o_uid', 'u_id')->where('u_id', '=', $uid);
+        $uid = Session::get('uid');
+        return $this->belongsTo('App\User', 'uid', 'uid')->where('users.uid', $uid);
     }
 
     public function ticket()
     {
-        return $this->belongsTo('App\Ticket', 'o_tid', 't_id');
+        return $this->belongsTo('App\Ticket', 'tid', 'tid');
+    }
+
+    protected function makeOrderID($time, $uid)
+    {
+        $stamp = $time . $uid;
+        return hash("sha1", $stamp);
     }
 }

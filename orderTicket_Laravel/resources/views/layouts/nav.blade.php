@@ -18,12 +18,12 @@
             </li>
         </ul>
         <ul class="navbar-nav">
-            @if(!Session::has('u_id') )
+            @if(!Session::has('uid') )
                 <li class="nav-item  active"><a class="nav-link" href="{{ url('/login') }}">會員登入</a></li>
             @else
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">{{Session::get('u_name')}}</a>
+                       aria-haspopup="true" aria-expanded="false">{{Session::get('uname')}}</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
                         <a class="dropdown-item" href="#">會員資料</a>
                         <a class="dropdown-item" href="{{url('/order')}}">訂票內容</a>

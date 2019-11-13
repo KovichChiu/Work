@@ -10,19 +10,19 @@ class UserController extends Controller
 {
     public function login(Request $request)
     {
-        $u_acc = $request->acc;
-        $u_pswd = hash('sha512', $request->pswd);
+        $uacc = $request->acc;
+        $upswd = hash('sha512', $request->pswd);
 
         $user = new User;
-        $user = $user->checkLogin($u_acc, $u_pswd);
+        $user = $user->checkLogin($uacc, $upswd);
 
         $content = "登入失敗，請重新登入";
         $href = "/login";
 
         if ($user !== null) {
-            Session::put('u_id', $user->u_id);
-            Session::put('u_acc', $u_acc);
-            Session::put('u_name', $user->u_name);
+            Session::put('uid', $user->uid);
+            Session::put('uacc', $uacc);
+            Session::put('uname', $user->uname);
             $content = "登入成功";
             $href = "/";
         }
@@ -31,20 +31,19 @@ class UserController extends Controller
 
     public function signup(Request $request)
     {
-        $u_name = $request->input("name");
-        $u_acc = $request->input("acc");
-        $u_pswd = $request->input("pswd");
+        $uname = $request->input("name");
+        $uacc = $request->input("acc");
+        $upswd = $request->input("pswd");
 
         $content = "註冊失敗，請重新註冊";
         $href = "/signup";
 
         $user = new User;
-        if (!$user->checkAccExists($u_acc)) {
-            $u_id = sha1($u_name . $u_acc . $u_pswd . time());
-            $user->addAccount($u_id, $u_name, $u_acc, $u_pswd);
-            Session::put('u_id', $user->u_id);
-            Session::put('u_acc', $u_acc);
-            Session::put('u_name', $user->u_name);
+        if (!$user->checkAccExists($uacc)) {
+            $user->addAccount($uname, $uacc, $upswd);
+            Session::put('uid', $user->uid);
+            Session::put('uacc', $uacc);
+            Session::put('uname', $user->uname);
             $content = "註冊成功，已成功登入";
             $href = "/";
         }

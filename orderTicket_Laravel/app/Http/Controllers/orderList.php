@@ -14,10 +14,10 @@ class orderList extends Controller
     protected function getData()
     {
         $arr = [
-            't_name',
-            't_price',
-            't_content',
-            't_id',
+            'tname',
+            'tprice',
+            'tcontent',
+            'tid',
         ];
         $ticket = Ticket::all($arr);
         return $ticket;

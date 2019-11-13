@@ -7,25 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     public $timestamps = false;
-    protected $table = 'u_account';
-    protected $primaryKey = 'u_acc';
+    public $incrementing = false;
+    protected $primaryKey = 'uid';
 
     public function checkLogin($acc, $pswd)
     {
-        return $this->where('u_acc', $acc)->where('u_pswd', $pswd)->first();
+        return $this->where('uacc', $acc)->where('upswd', $pswd)->first();
     }
 
-    public function checkAccExists($acc)
+    public function checkAccExists($uid)
     {
-        return $this->where('u_acc', '=', $acc)->exists();
+        return $this->where('uid', $uid)->exists();
     }
 
-    public function addAccount($u_id, $u_name, $u_acc, $u_pswd)
+    public function addAccount($u_name, $u_acc, $u_pswd)
     {
-        $this->u_id = $u_id;
-        $this->u_name = $u_name;
-        $this->u_acc = $u_acc;
-        $this->u_pswd = hash('sha512', $u_pswd);
+        $this->uid = guid();
+        $this->uname = $u_name;
+        $this->uacc = $u_acc;
+        $this->upswd = hash('sha512', $u_pswd);
         $this->save();
     }
 }

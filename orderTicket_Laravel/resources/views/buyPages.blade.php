@@ -15,16 +15,16 @@
             @foreach($data as $values)
                 <div class="card mb-4 shadow-sm">
                     <div class="card-header">
-                        <h4 class="my-0 font-weight-normal">{{$values['t_name']}}</h4>
+                        <h4 class="my-0 font-weight-normal">{{$values['tname']}}</h4>
                     </div>
                     <div class="card-body">
-                        <h1 class="card-title pricing-card-title">{{$values['t_price']}}<small
+                        <h1 class="card-title pricing-card-title">{{$values['tprice']}}<small
                                 class="text-muted">/NTD</small></h1>
                         <ul class="list-unstyled mt-3 mb-4">
-                            {!! $values['t_content'] !!}
+                            {!! $values['tcontent'] !!}
                         </ul>
-                        <a class="btn btn-outline-primary" data-toggle="tooltip{{$values['t_id']}}"
-                           href="{{url('/orderQueue/'.$values['t_id'])}}">
+                        <a class="btn btn-outline-primary" data-toggle="tooltip{{$values['tid']}}"
+                           href="{{url('/orderQueue/'.$values['tid'])}}">
                             我要訂票
                         </a>
                     </div>
